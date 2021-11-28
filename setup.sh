@@ -8,5 +8,4 @@ echo "\
 headless = true\n\
 enableCORS=false\n\
 port = $PORT\n\
-textColor=#262730\n\
 " > ~/.streamlit/config.toml
