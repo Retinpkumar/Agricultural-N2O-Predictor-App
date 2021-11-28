@@ -7,7 +7,6 @@ st.set_page_config(page_title="Agricultural N2O Flux Predictor",
                    layout="centered")
 
 st.title("Agricultural N2O Flux Predictor App")
-st.image('images/cornpic.jpg')
 
 feats = ['PP2', 'PP7', 'AirT', 'WFPS25cm', 'NH4', 'NO3', 'Mean_DAF',
        'Season_Spring', 'Season_Summer', 'Season_Winter', 'Vegetation_Others',
