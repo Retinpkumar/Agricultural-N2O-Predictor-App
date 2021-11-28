@@ -11,7 +11,7 @@ pandas
 pandas-profiling==3.1.0
 Pillow
 plotly==5.3.1
-pywin32==227
+pywin32==225;platform_system == "Windows"
 pywin32-ctypes==0.2.0
 pywinpty==0.5.7
 scikit-image==0.18.1
