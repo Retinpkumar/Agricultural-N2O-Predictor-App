@@ -1,21 +1,19 @@
 import streamlit as st
 from src.model import predict
 import numpy as np
+import pandas as pd
 
 st.set_page_config(page_title="Agricultural N2O Flux Predictor",
                    page_icon="🌱",
                    layout="centered")
 
-st.title("Agricultural N2O Flux Predictor App")
+st.title(f"Agricultural Flux Predictor App") # page header
 
-feats = ['PP2', 'PP7', 'AirT', 'WFPS25cm', 'NH4', 'NO3', 'Mean_DAF',
-       'Season_Spring', 'Season_Summer', 'Season_Winter', 'Vegetation_Others',
-       'N_rate_1', 'Clay_2', 'Clay_3', 'Sand_2', 'Sand_3', 'SOM_1']
 
 with st.form("Prediction_form"):
 
-    st.header("Enter the input factors:")
-
+    st.header("Enter the input factors:") # form header
+    # input elements
     pp2 = st.number_input("PP2: (Cumulative precipitation in the last two days before gas sampling in mm): ")
     pp7 = st.number_input("PP7: (Cumulative precipitation in the last week before gas sampling in mm)")
     airt = st.number_input("AirT: (Mean daily air temperature in °C)")
@@ -77,21 +75,29 @@ if submit_val:
     else:
         feat_som = 1
 
+    # list of features
+    feats = ['PP2', 'PP7', 'AirT', 'WFPS25cm', 'NH4', 'NO3', 'Mean_DAF',
+             'Season_Spring', 'Season_Summer', 'Season_Winter', 'Vegetation_Others',
+             'N_rate_1', 'Clay_2', 'Clay_3', 'Sand_2', 'Sand_3', 'SOM_1']
 
-    attribute = np.array([pp2, pp7, airt, wfps, nh4, no3, mean_daf,
+    # list of corresponding input values
+    attribute_vals = [pp2, pp7, airt, wfps, nh4, no3, mean_daf,
                           feat_season[0], feat_season[1], feat_season[2],
                           feat_veg,
                           feat_nrate,
                           feat_clay[0], feat_clay[1],
-                          feat_sand[0], feat_sand[1], feat_som]).reshape(1, -1)
+                          feat_sand[0], feat_sand[1], feat_som]
 
-    print("Attributes valid")
+    # dictionary of features and values
+    attr_dict = dict(zip(feats, attribute_vals))
 
-    value = predict(attributes=attribute)
+    # dataframe for scaling and model input
+    attr_df = pd.DataFrame(attr_dict, index=[1])
 
-    st.header("Here are the results: ")
+    # predicted value from the model
+    value = predict(attributes=attr_df)
+
+    st.header("Here are the results: ") # results header
+    # output results
     st.success(f"The Atmospheric Nitrous Oxide Concentration for the given inputs is: {value} ppb/yr")
     st.balloons()
-else:
-    st.error("You have entered invalid attributes")
-
