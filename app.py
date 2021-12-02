@@ -59,7 +59,7 @@ if submit_val:
         feat_som = 2
 
     # list of features
-    feats = ['pp2', 'pp7', 'airt', 'wfps', 'nh4', 'no3', 'mean_daf', 'season', 'veg', 'nrate', 'som']
+    feats = ['PP2', 'PP7', 'AirT', 'WFPS25cm', 'NH4', 'NO3', 'Mean_DAF', 'Season', 'Vegetation', 'N_rate', 'SOM']
     # list of corresponding input values
     attribute_vals = [pp2, pp7, airt, wfps, nh4, no3, mean_daf, feat_season, feat_veg, feat_nrate, feat_som]
     # dictionary of features and values
@@ -69,7 +69,7 @@ if submit_val:
     # getting values from training data to transform incoming inputs
     train_df = input_transformer()
     # transforming incoming inputs
-    for feat in ['pp2', 'pp7', 'nh4', 'no3', 'mean_daf',]:
+    for feat in ['PP2', 'PP7', 'NH4', 'NO3', 'Mean_DAF']:
         # log transform
         attr_df[feat] = np.log1p(attr_df[feat])
         # capping upper and lower values
