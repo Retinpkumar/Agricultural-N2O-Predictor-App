@@ -8,7 +8,7 @@ st.set_page_config(page_title="Agricultural N2O Flux Predictor",
                    page_icon="🌱",
                    layout="centered")
 # page header
-st.title(f"Agricultural Flux Predictor App")
+st.title(f"Agricultural N2O Flux Predictor App")
 
 
 with st.form("Prediction_form"):
