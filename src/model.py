@@ -1,6 +1,7 @@
 import pickle
 import os
 import numpy as np
+from sklearn.ensemble import RandomForestRegressor
 
 current_path = os.path.dirname(os.path.realpath(__file__))
 
