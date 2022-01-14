@@ -1,85 +1,72 @@
 import streamlit as st
 from src.model import predict
-from src.transformer import input_transformer
+from src.scaler import input_scaler
 import numpy as np
 import pandas as pd
+import shap
+import pickle
+import matplotlib.pyplot as plt
+
 # page settings
 st.set_page_config(page_title="Agricultural N2O Flux Predictor",
-                   page_icon="🌱",
-                   layout="centered")
+                page_icon="🌱",
+                layout="centered")
 # page header
-st.title(f"Agricultural N2O Flux Predictor App")
+st.title("Agricultural N2O Flux Predictor App")
 
 
 with st.form("Prediction_form"):
     # form header
     st.header("Enter the input factors:")
     # input elements
-    pp2 = st.number_input("PP2: (Cumulative precipitation in the last two days before gas sampling in mm): ")
-    pp7 = st.number_input("PP7: (Cumulative precipitation in the last week before gas sampling in mm)")
-    airt = st.number_input("AirT: (Mean daily air temperature in °C)")
-    wfps = st.number_input("WFPS25cm: (Water filled pore space in the top 25cm soil layer.)")
     nh4 = st.number_input("NH4: (Ammonium Nitrogen content in the top 25cm soil layer in kg/ha)")
-    no3 = st.number_input("NO3: (Nitrate Nitrogen content in the top 25cm soil layer in kg/ha)")
-    mean_daf = st.number_input("Mean_DAF: (Average days after Nitrogen fertilization)")
-    season = st.selectbox("Season: ",["Summer", "Winter", "Spring", "Fall"])
-    veg = st.selectbox("Vegetation: ", ["Corn", "Others"])
-    nrate = st.number_input("N_rate: (Nitrogen fertilizer application rate in kg/ha)")
     som = st.number_input("SOM: (Soil organic matter concentration in %)")
+    pp7 = st.number_input("PP7: (Cumulative precipitation in the last week before gas sampling in mm)")
+    dafsd = st.number_input("DAFSD: (Days after side dressed Nitrogen fertilization)")
+    wfps = st.number_input("WFPS25cm: (Water filled pore space in the top 25cm soil layer.)")
+    airt = st.number_input("AirT: (Mean daily air temperature in °C)")
+    no3 = st.number_input("NO3: (Nitrate Nitrogen content in the top 25cm soil layer in kg/ha)")
     # submitting values
     submit_val = st.form_submit_button("Predict")
+    if submit_val:
+        # list of features
+        feats = ['nh4', 'pp7', 'dafsd', 'wfps', 'no3', 'som', 'airt']
+        with open('model/features.pickle', 'wb') as f:
+            pickle.dump(feats, f)
+        # list of corresponding input values
+        attribute_vals = [nh4, pp7, dafsd, wfps,  no3, som, airt]
+        # dictionary of features and values
+        attr_dict = dict(zip(feats, attribute_vals))
+        # dataframe for scaling and model input
+        attr_df = pd.DataFrame(attr_dict, index=[1])
+    
+        # square transform
+        attr_df['wfps'] = np.square(attr_df['wfps'])
+        # square root transformation
+        attr_df['dafsd'] = np.sqrt(attr_df["dafsd"])
+        
+        # scaling input data
+        scaled_df = input_scaler(attr_df)
+        with open('model/scaled_df.pickle', 'wb') as f:
+            pickle.dump(scaled_df, f)
 
-if submit_val:
-    # for season
-    if season=='Spring':
-        feat_season = 2
-    elif season=='Summer':
-        feat_season = 3
-    elif season=='Winter':
-        feat_season = 1
-    else:
-        feat_season = 4
+        # predicted value from the model
+        value = predict(attributes=scaled_df)
+        
+        # results header
+        st.header("Result: ")
+        # output results
+        st.success(f"Predicted Agricultural N2O Flux: {value} ppb/yr")
+        st.balloons()
 
-    # for vegetation
-    if veg=='Corn':
-        feat_veg=1
-    else:
-        feat_veg=2
+st.title("Contribution of features to the model")
+st.image("plots/summaryplot.png",use_column_width=True)
 
-    # for nrate
-    if nrate<170:
-        feat_nrate=1
-    else:
-        feat_nrate=2
-
-    # for som
-    if som < 2:
-        feat_som = 1
-    else:
-        feat_som = 2
-
-    # list of features
-    feats = ['PP2', 'PP7', 'AirT', 'WFPS25cm', 'NH4', 'NO3', 'Mean_DAF', 'Season', 'Vegetation', 'N_rate', 'SOM']
-    # list of corresponding input values
-    attribute_vals = [pp2, pp7, airt, wfps, nh4, no3, mean_daf, feat_season, feat_veg, feat_nrate, feat_som]
-    # dictionary of features and values
-    attr_dict = dict(zip(feats, attribute_vals))
-    # dataframe for scaling and model input
-    attr_df = pd.DataFrame(attr_dict, index=[1])
-    # getting values from training data to transform incoming inputs
-    train_df = input_transformer()
-    # transforming incoming inputs
-    for feat in ['PP2', 'PP7', 'NH4', 'NO3', 'Mean_DAF']:
-        # log transform
-        attr_df[feat] = np.log1p(attr_df[feat])
-        # capping upper and lower values
-        attr_df[feat] = np.where(attr_df[feat]>max(train_df[feat]), max(train_df[feat]),
-                            np.where(attr_df[feat]<min(train_df[feat]), min(train_df[feat]), attr_df[feat]))
-
-    # predicted value from the model
-    value = predict(attributes=attr_df)
-    # results header
-    st.header("Result: ")
-    # output results
-    st.success(f"Agricultural N2O Flux is predicted to be about {value} ppb/yr")
-    st.balloons()
+# with open('model/explainer.pickle', 'rb') as f:
+#     explainer = pickle.load(f)
+# with open('model/explained_shapvalues.pickle', 'rb') as f:
+#     shap_values = pickle.load(f)
+# with open('model/scaled_df.pickle', 'rb') as f:
+#     scaled_df = pickle.load(f)
+# with open('model/features.pickle', 'rb') as f:
+#     feats = pickle.load(f)
