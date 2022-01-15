@@ -12,10 +12,10 @@ st.set_page_config(page_title="Agricultural N2O Flux Predictor",
                 page_icon="🌱",
                 layout="centered")
 # page header
-st.title("Agricultural N2O Flux Predictor App")
+st.sidebar.title("Agricultural N2O Flux Predictor App")
 
 
-with st.form("Prediction_form"):
+with st.sidebar.form("Prediction_form"):
     # form header
     st.header("Enter the input factors:")
     # input elements
@@ -58,15 +58,35 @@ with st.form("Prediction_form"):
         # output results
         st.success(f"Predicted Agricultural N2O Flux: {value} ppb/yr")
         st.balloons()
-
-st.title("Contribution of features to the model")
+    
+st.subheader("Contribution of features to the model")
 st.image("plots/summaryplot.png",use_column_width=True)
 
-# with open('model/explainer.pickle', 'rb') as f:
-#     explainer = pickle.load(f)
-# with open('model/explained_shapvalues.pickle', 'rb') as f:
-#     shap_values = pickle.load(f)
-# with open('model/scaled_df.pickle', 'rb') as f:
-#     scaled_df = pickle.load(f)
-# with open('model/features.pickle', 'rb') as f:
-#     feats = pickle.load(f)
+st.subheader("Feature Dependancy Plots",)
+from PIL import Image
+image1 = Image.open('plots/nh4_dep_plot.png')
+image2 = Image.open('plots/som_dep_plot.png')
+image3 = Image.open('plots/pp7_dep_plot.png')
+image4 = Image.open('plots/dafsd_dep_plot.png')
+image5 = Image.open('plots/wfps_dep_plot.png')
+image6 = Image.open('plots/airt_dep_plot.png')
+image7 = Image.open('plots/no3_dep_plot.png')
+
+st.image(image1, caption='NH4 dependancy plot', use_column_width=True)
+
+st.image(image2, caption='SOM dependancy plot')
+
+
+st.image(image2, caption='PP7 dependancy plot')
+
+
+st.image(image4, caption='DAFSD dependancy plot')
+
+
+st.image(image5, caption='WFPS dependancy plot')
+
+
+st.image(image6, caption='AIRT dependancy plot')
+
+
+st.image(image7, caption='NO3 dependancy plot')
