@@ -74,19 +74,19 @@ image7 = Image.open('plots/no3_dep_plot.png')
 
 st.image(image1, caption='NH4 dependancy plot', use_column_width=True)
 
-st.image(image2, caption='SOM dependancy plot')
+st.image(image2, caption='SOM dependancy plot', use_column_width=True)
 
 
-st.image(image2, caption='PP7 dependancy plot')
+st.image(image2, caption='PP7 dependancy plot', use_column_width=True)
 
 
-st.image(image4, caption='DAFSD dependancy plot')
+st.image(image4, caption='DAFSD dependancy plot', use_column_width=True)
 
 
-st.image(image5, caption='WFPS dependancy plot')
+st.image(image5, caption='WFPS dependancy plot', use_column_width=True)
 
 
-st.image(image6, caption='AIRT dependancy plot')
+st.image(image6, caption='AIRT dependancy plot', use_column_width=True)
 
 
-st.image(image7, caption='NO3 dependancy plot')
+st.image(image7, caption='NO3 dependancy plot', use_column_width=True)
