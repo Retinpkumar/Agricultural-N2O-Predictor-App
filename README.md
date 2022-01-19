@@ -18,7 +18,7 @@ The app uses a machine learning model known as "Random Forest Regressor" for pre
 </div>
 As you can see, "NH<sub>4</sub>" (ie, Ammonium content in the top 25cm soil layer) contributes the most in predicting the amount of Nitrous Oxide flux released. 
 
-###### The "Red" points indicate positive contributions by the features towards the output prediction, whereas the "Blue" points indicate their negative contributions.
+###### The "Red" points indicate positive contributions by the features towards the output prediction, whereas the "Blue" points indicate their negative contributions. Also, right side indicates positive impact and vice-versa.
 <hr>
 <h3 align=center> To run the app in your local system </h3>
 
