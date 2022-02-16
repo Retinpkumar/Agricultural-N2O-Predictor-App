@@ -1,4 +1,5 @@
 [theme]
  textColor="#000000"
  backgroundColor="#D3ECDB"
+ secondaryBackgroundColor="#9DF0F3"
  font="sans serif"
