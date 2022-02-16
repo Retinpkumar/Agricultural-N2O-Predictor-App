@@ -22,7 +22,7 @@ def app():
         pp7 = st.number_input("PP7: (Cumulative precipitation in the last week before gas sampling in mm)")
         dafsd = st.slider("DAFSD: (Days after side dressed Nitrogen fertilization)", min_value=0, max_value=365, step=1, value=0)
         wfps = st.number_input("WFPS25cm: (Water filled pore space in the top 25cm soil layer.)")
-        airt = st.slider("AirT: (Mean daily air temperature in °C)", min_value=-60.0, max_value=60.0, step=0.5, value=25.0)
+        airt = st.slider("AirT: (Mean daily air temperature in °C)", min_value=-60.0, max_value=60.0, step=0.01, value=25.0)
         no3 = st.number_input("NO3: (Nitrate Nitrogen content in the top 25cm soil layer in kg/ha)")
         # submitting values
         submit_val = st.form_submit_button("Predict")
