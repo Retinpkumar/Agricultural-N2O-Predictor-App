@@ -16,8 +16,21 @@ class MultiPage:
     def run(self):
         """Dropdown to select the page to run"""
         page = st.sidebar.selectbox(
-            'Navigation Dropdown', 
+            '', 
             self.pages, 
             format_func=lambda page: page['title'])
+        st.sidebar.markdown('---')
+
+        st.sidebar.markdown("## About the app")
+        st.sidebar.write("""
+        The app aims at predicting the agricultural nitrous oxide(N2O) emissions from intensively managed cropping systems.
+        The dataset used for model training has been obtained from an already existing study conducted by Debashish Saha and others.
+        This app was able to improve the model performance from 38% (that was based on the scientific study conducted) to 78%. 
+        For more details regarding the codes and notebooks, visit "https://github.com/Retinpkumar".
+        """)
+
+        st.sidebar.markdown('---')
+        st.sidebar.markdown("## Made by: ")
+        st.sidebar.write("Retin P Kumar|November 2021")
         # run the app function 
         page['function']()

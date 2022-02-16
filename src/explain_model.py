@@ -10,6 +10,8 @@ def app():
     interaction between the model features.
     """)
 
+    st.markdown('---')
+
     st.header("Contribution of features to the model")
 
     st.write("""
@@ -33,6 +35,8 @@ def app():
     decomposition of ammonium rich fertilizers. 
     """)
 
+    st.markdown('---')
+
     st.header("Feature Dependancy Plots")
 
     st.write(""" This plot shows the interaction between two features and the data points from this interaction 
@@ -55,13 +59,11 @@ def app():
     with col3:
         st.image(image3, caption='PP7 dependancy plot', use_column_width=True)
 
-    col4, col5 = st.columns(2)
+    col4, col5, col6, col7 = st.columns(4)
     with col4:
         st.image(image4, caption='DAFSD dependancy plot', use_column_width=True)
     with col5:
         st.image(image5, caption='WFPS dependancy plot', use_column_width=True)
-
-    col6, col7 = st.columns(2)
     with col6:
         st.image(image6, caption='AIRT dependancy plot', use_column_width=True)
     with col7:

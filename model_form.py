@@ -55,7 +55,8 @@ def app():
             st.header("Result: ")
             # output results
             st.success(f"Predicted Agricultural N2O Flux: {value} ppb/yr")
-            st.balloons()
+            
+            st.markdown('---')
     
             with open('model/final_model.pickle', 'rb') as f:
                 model = pickle.load(f)
@@ -76,4 +77,4 @@ def app():
 
             force_plot_image = Image.open(curr_path + force_plot_path)
 
-            st.image(force_plot_image, caption="Feature contribution in the output with respect to input data")
+            st.image(force_plot_image, caption="Marginal contribution of the features in the output with respect to input data")

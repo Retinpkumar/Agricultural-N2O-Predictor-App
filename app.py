@@ -6,7 +6,7 @@ from src import explain_model
 # page settings
 st.set_page_config(page_title="Agricultural N2O Flux Predictor",
                 page_icon="🌱",
-                layout="centered")
+                layout="wide")
 
 # Create an instance of the app 
 app = MultiPage()
@@ -14,6 +14,7 @@ app = MultiPage()
 # Title of the main page
 st.title("🌱 Agricultural N2O Flux Predictor App")
 
+st.sidebar.markdown("# App Navigation")
 # Add all your applications (pages) here
 app.add_page("Make Prediction", model_form.app)
 app.add_page("Understand the Model", explain_model.app)
