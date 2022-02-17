@@ -34,6 +34,8 @@ Other major libraries used include Numpy, Pandas, Matplotlib, Scikit-learn and S
 The app is currently deployed on heroku.  
 
 
+## High level overview
+![](https://github.com/Retinpkumar/Agricultural-N2O-Predictor-App/blob/main/images/app_working.png)
 
 ## Running the app locally
 * Inside a new directory clone the files from the repo using  
