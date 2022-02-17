@@ -19,18 +19,16 @@ class MultiPage:
             '', 
             self.pages, 
             format_func=lambda page: page['title'])
-        st.sidebar.markdown('---')
 
-        st.sidebar.markdown("## About the app")
+        st.sidebar.header("About the app")
         st.sidebar.write("""
-        The app aims at predicting the agricultural nitrous oxide(N2O) emissions from intensively managed cropping systems.
-        The dataset used for model training has been obtained from an already existing study conducted by Debashish Saha and others.
-        This app was able to improve the model performance from 38% (that was based on the scientific study conducted) to 78%. 
-        For more details regarding the codes and notebooks, visit "https://github.com/Retinpkumar".
+        The app is aimed at predicting the agricultural nitrous oxide(N2O) emissions from intensively managed cropping systems.
+        The dataset used for training the model has been obtained from an already existing study conducted by Debashish Saha and others.
+        This model used in the app was able to improve the performance(R2 score) from 38% (that was based on the scientific study conducted) to 78%.
         """)
 
         st.sidebar.markdown('---')
-        st.sidebar.markdown("## Made by: ")
-        st.sidebar.write("Retin P Kumar|November 2021")
+        st.sidebar.info("### Made by:    Retin P Kumar")
+        st.sidebar.markdown("[![Github](https://avatars.githubusercontent.com/u/9919?s=280&v=4)](https://github.com/Retinpkumar)")
         # run the app function 
         page['function']()

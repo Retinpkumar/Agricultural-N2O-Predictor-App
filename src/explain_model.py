@@ -1,31 +1,35 @@
+from turtle import window_width
 import streamlit as st
 from PIL import Image
 
 def app():
+    st.markdown("<h2 align='center'>Model Explanation using Explainable AI</h2>", unsafe_allow_html=True)
     st.write("""
     Explainable AI helps in comprehending the model output and its expected impact. It also helps with understanding the 
     marginal contribution  of each feature that has been used for building the model.
 
-    We have used an explainable AI tool named 'SHAP' for interpreting our model output and also in understanding the 
-    interaction between the model features.
+    In this app, I have used an explainable AI tool named 'SHAP' for interpreting our model output and also in understanding the 
+    interaction between the model features. The interpretation for the model output is provided alonside the model prediction.
+
+    In this page, you will find the details regarding the importance and contribution of each feature that has been used for building
+    the model. Also, you will find the interactions between various features with the help of feature dependancy plots.
     """)
+    st.markdown("---")
 
-    st.markdown('---')
-
-    st.header("Contribution of features to the model")
+    st.markdown("<h2>Contribution of features to the model</h2>", unsafe_allow_html=True)
 
     st.write("""
     This plot displays the summary of the impact of top features in a dataset on the model prediction. 
     Each dot represents each individual observation in the dataset.
 
     Blue points indicate those observations that fail to contribute to the model and 
-    red ones indicate those that aid the model.
+    red ones indicate those that aided the model.
 
-    The features are arranged in the decreasing order of priority so that the topmost feature is
+    The features are arranged in the decreasing order of priority and hence the topmost feature is
     the most important one.
     """)
 
-    st.image("plots/summaryplot.png",use_column_width=True)
+    st.image("plots/summaryplot.png")
 
     st.write("""
     From the above figure, we observe that 'NH4' followed by 'SOM' and 'PP7' are the 3 the most important feature 
@@ -37,7 +41,7 @@ def app():
 
     st.markdown('---')
 
-    st.header("Feature Dependancy Plots")
+    st.markdown("<h2>Feature Dependancy Plots</h2>", unsafe_allow_html=True)
 
     st.write(""" This plot shows the interaction between two features and the data points from this interaction 
     that are contributing to the model.
@@ -70,7 +74,7 @@ def app():
         st.image(image7, caption='NO3 dependancy plot', use_column_width=True)
 
     st.write("""
-    We observe that lower value of ammonium content and lower to no rainfall results in greater amount of N2O released.
+    It is observed that lower value of ammonium content and lower to no rainfall results in greater amount of N2O released.
     This is supportive of the fact that a heavy rainfall washes away the soil contents including the fertilizer applied.
 
     Soil organic matter content depends linearly on the water frontage pore space. The most contributing data points are

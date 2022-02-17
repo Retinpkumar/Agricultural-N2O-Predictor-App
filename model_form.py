@@ -13,12 +13,13 @@ from PIL import Image
 curr_path = os.path.dirname(os.path.realpath(__file__))
 
 def app():
+    st.markdown("<h2 align='center'> Predict the Agricultural Nitrous Oxide output</h2>", unsafe_allow_html=True)
     with st.form("Prediction_form"):
         # form header
-        st.header("Enter the input factors:")
+        st.subheader("Input the data for prediction:")
         # input elements
         nh4 = st.number_input("NH4: (Ammonium Nitrogen content in the top 25cm soil layer in kg/ha)")
-        som = st.number_input("SOM: (Soil organic matter concentration in %)")
+        som = st.slider("SOM: (Soil organic matter concentration in %)", min_value=0.00, max_value=100.00, step=0.01, value=0.00)
         pp7 = st.number_input("PP7: (Cumulative precipitation in the last week before gas sampling in mm)")
         dafsd = st.slider("DAFSD: (Days after side dressed Nitrogen fertilization)", min_value=0, max_value=365, step=1, value=0)
         wfps = st.number_input("WFPS25cm: (Water filled pore space in the top 25cm soil layer.)")
@@ -75,6 +76,6 @@ def app():
                             show=False,
                             matplotlib=True).savefig(curr_path + force_plot_path, bbox_inches='tight')
 
+            st.subheader("Marginal contribution of input features in the prediction")
             force_plot_image = Image.open(curr_path + force_plot_path)
-
-            st.image(force_plot_image, caption="Marginal contribution of the features in the output with respect to input data")
+            st.image(force_plot_image)

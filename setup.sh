@@ -6,7 +6,7 @@ email = \"your-email@domain.com\"\n\
 echo "\
 [theme]\n\
  textColor='#000000'\n\
- backgroundColor='#D3ECDB'\n\
+ secondaryBackgroundColor='#C7DDBE'\n\
  font='sans serif'\n\
 [server]\n\
 headless = true\n\
