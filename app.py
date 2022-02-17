@@ -13,7 +13,7 @@ app = MultiPage()
 
 # Title of the main page
 
-st.markdown("<h1 align='center'>🌱 Agricultural N<sub>2</sub>O flux Prediction App </h1>", unsafe_allow_html=True)
+st.markdown("<h1 align='center'>🌱 Agricultural N2O flux Prediction App </h1>", unsafe_allow_html=True)
 st.image("images/title_image.jpg", use_column_width=True)
 
 st.sidebar.title("App Navigation")
