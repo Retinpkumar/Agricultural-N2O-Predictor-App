@@ -81,7 +81,8 @@ def app():
         st.image(image7, caption='NO3 dependancy plot', use_column_width=True)
 
     st.write("""
-    It is observed that:
+    It is observed that: 
+    
     1. Lower values of 'NH4' has a positive linear relationship with the model output.
     
     2. 'NH4' interacts the most with 'PP7'
