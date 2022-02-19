@@ -20,30 +20,38 @@ def app():
     st.write("""
     This plot displays the summary of the impact of top features in a dataset on the model prediction. 
     Each dot represents each individual observation in the dataset.
-
-    Blue points indicate those observations that fail to contribute to the model and 
-    red ones indicate those that aided the model.
-
-    The features are arranged in the decreasing order of priority and hence the topmost feature is
-    the most important one.
+    
+    The color of each dot represents the value of the feature for that particular observation. Blue dot indicate
+    lower value and Red dot indicate higher value for a particular observation.
+    
+    Dots to the right of the center line indicate those observations that has a positive impact on the output, and
+    the dots to the left of the center line indicate those observations that negatively impacts the output.
     """)
 
     st.image("plots/summaryplot.png")
 
     st.write("""
-    From the above figure, we observe that 'NH4' followed by 'SOM' and 'PP7' are the 3 the most important feature 
-    that is contributing to the model.
-
-    This supports the fact that atmospheric N2O released from intensively managed agricultural systems is due to the organic
-    decomposition of ammonium rich fertilizers. 
+    From the above figure, we observe that 'NH4' is the most impactful feature that is contributing to the model output.
+    Higher values of 'NH4' has a high and positive impact on the model output. The same is applicable for 'SOM', 'WFPS' and 'NO3' as well.
+    But 'WFPS' has more number of lower values that are negatively impacting the model output.
+    
+    For 'PP7' and 'AIRT', some of the lower values have a considerable positive impact on the model output though most of them have a 
+    negative impact on the output.
+    
+    On the contrary, higher values of 'DAFSD' has shown to have a negative impact on the model output with some exceptions. And, lower
+    values have a positive impact on the model output.
+    
+    These observations indicate that the atmospheric N2O released from intensively managed agricultural systems has:
+    1. A higher dependency on the ammonia and moisture content of the soil and higher atmospheric temperatures.
+    2. Lower dependancy on the number of days after fertilizer application.
     """)
 
     st.markdown('---')
 
     st.markdown("<h2>Feature Dependancy Plots</h2>", unsafe_allow_html=True)
 
-    st.write(""" This plot shows the interaction between two features and the data points from this interaction 
-    that are contributing to the model.
+    st.write(""" This plot shows the interaction between a given feature and the target. The plot also shows the interaction between the given feature
+    and a second feature with which the given feature interact has the most interaction.
     """)
 
     image1 = Image.open('plots/nh4_dep_plot.png')
@@ -73,14 +81,19 @@ def app():
         st.image(image7, caption='NO3 dependancy plot', use_column_width=True)
 
     st.write("""
-    It is observed that lower value of ammonium content and lower to no rainfall results in greater amount of N2O released.
-    This is supportive of the fact that a heavy rainfall washes away the soil contents including the fertilizer applied.
-
-    Soil organic matter content depends linearly on the water frontage pore space. The most contributing data points are
-    observed for higher values of 'SOM' across all values of 'WFPS'.
-
-    The contribution of 'NH4' and 'PP7' is only for a constant value of 'NH4' across lower values of 'PP7'
-
-    Though much meaningful interaction is not observed for 'DAFSD' against 'WFPS', the remaining three plots show a
-    good amount of linear dependancy for the corresponding features.
+    It is observed that: 
+    1. Lower values of 'NH4' has a positive linear relationship with the model output.
+    2. 'NH4' interacts the most with 'PP7'
+    3. Lower values of 'NH4' along with higher values of 'PP7' contributes to higher predicted values for the output.
+    4. 'SOM' interacts the most with 'WFPS'
+    5. Few higher values of 'SOM' and 'WFPS' result in higher values for the output.
+    6. 'PP7' interacts the most with 'NH4'
+    7. For 'PP7' values less than 1, lower values of 'NH4' gives a higher output compared to higher values of 'NH4'.
+    8. For 'PP7' values greater than 1, higher values of 'NH4' gives a higher output compared to lower values of 'NH4'.
+    9. 'DAFSD' interacts the most with 'WFPS' and not much relationship is found for 'DAFSD' with the target.
+    10. 'WFPS' interacts the most with 'NO3'.
+    11. For lower values of 'WFPS', higher values of 'NO3' results in a lower predicted output and for higher values of 'WFPS', 
+    higher values of 'NO3' results in a higher predicted output.
+    12. 'AIRT' interacts the most with 'PP7' and has a slightly positive linear relationship with the output.
+    13. 'NO3' interacts the most with 'PP7' and does not have much relationship with the target.
     """)
