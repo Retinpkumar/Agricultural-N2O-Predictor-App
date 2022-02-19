@@ -81,19 +81,31 @@ def app():
         st.image(image7, caption='NO3 dependancy plot', use_column_width=True)
 
     st.write("""
-    It is observed that: 
+    It is observed that:
     1. Lower values of 'NH4' has a positive linear relationship with the model output.
+    
     2. 'NH4' interacts the most with 'PP7'
+    
     3. Lower values of 'NH4' along with higher values of 'PP7' contributes to higher predicted values for the output.
+    
     4. 'SOM' interacts the most with 'WFPS'
+    
     5. Few higher values of 'SOM' and 'WFPS' result in higher values for the output.
+    
     6. 'PP7' interacts the most with 'NH4'
+    
     7. For 'PP7' values less than 1, lower values of 'NH4' gives a higher output compared to higher values of 'NH4'.
+    
     8. For 'PP7' values greater than 1, higher values of 'NH4' gives a higher output compared to lower values of 'NH4'.
+    
     9. 'DAFSD' interacts the most with 'WFPS' and not much relationship is found for 'DAFSD' with the target.
+    
     10. 'WFPS' interacts the most with 'NO3'.
+    
     11. For lower values of 'WFPS', higher values of 'NO3' results in a lower predicted output and for higher values of 'WFPS', 
     higher values of 'NO3' results in a higher predicted output.
+    
     12. 'AIRT' interacts the most with 'PP7' and has a slightly positive linear relationship with the output.
+    
     13. 'NO3' interacts the most with 'PP7' and does not have much relationship with the target.
     """)
