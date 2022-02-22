@@ -40,7 +40,7 @@ Though there were previous attempts at identifying and quantifying the agricultu
 
 
 ```
-PatientSurvivalPrediction
+Agricultural-N2O-Predictor-App
 |
 |—— .streamlit
 |    |—— config.toml
